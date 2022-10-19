@@ -1,8 +1,8 @@
 package com.example.gaeguri.domein.auth.Exception;
 
-import com.example.gaeguri.global.Result.Result;
+import com.example.gaeguri.global.Response.Result;
 import com.example.gaeguri.global.exception.*;
-import com.example.gaeguri.global.service.ResponseService;
+import com.example.gaeguri.global.Response.service.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
