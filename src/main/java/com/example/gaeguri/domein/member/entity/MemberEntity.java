@@ -1,7 +1,6 @@
 package com.example.gaeguri.domein.member.entity;
 
 import com.example.gaeguri.domein.member.entity.type.Role;
-import com.example.gaeguri.domein.post.type.Age;
 import com.example.gaeguri.global.Entity.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@Table(name = "User")
 @NoArgsConstructor
 public class MemberEntity extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,27 +25,32 @@ public class MemberEntity extends BaseTimeEntity {
 
     private String profileimage;
 
-    private Age age;
+    private String age;
 
     private String refreshToken;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    private List<String> position;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Enumerated(EnumType.STRING)
     private List<Role> roles;
 
     @Builder
-    public MemberEntity(String id, String password, String profileimage ,String info, Age age) {
+    public MemberEntity(String id, String password, String profileimage ,String info, String age, List<String> position) {
         this.id = id;
         this.password = password;
         this.info = info;
         this.profileimage = profileimage;
+        this.position = position;
         this.age = age;
     }
 
-    public void update(String password, String profileimage, String info, Age age) {
+    public void update(String password, String profileimage, String info, String age, List<String> position) {
         this.password = password;
         this.info = info;
         this.profileimage = profileimage;
+        this.position = position;
         this.age = age;
     }
 
