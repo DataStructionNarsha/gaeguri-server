@@ -11,7 +11,6 @@ import com.example.gaeguri.domein.member.entity.MemberEntity;
 import com.example.gaeguri.domein.member.repository.MemberRepository;
 import com.example.gaeguri.global.exception.InvalidRefreshTokenException;
 import com.example.gaeguri.global.exception.LoginFailureException;
-import com.example.gaeguri.global.exception.MemberEmailAlreadyExistsException;
 import com.example.gaeguri.global.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
