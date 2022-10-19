@@ -1,4 +1,4 @@
-package com.example.gaeguri.global.Result;
+package com.example.gaeguri.global.Response;
 
 import lombok.Getter;
 import lombok.Setter;
