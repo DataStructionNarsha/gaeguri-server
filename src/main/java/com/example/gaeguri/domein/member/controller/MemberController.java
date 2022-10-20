@@ -6,14 +6,16 @@ import com.example.gaeguri.domein.member.dto.request.UserLoginRequestDto;
 import com.example.gaeguri.domein.member.dto.request.UserSignupRequestDto;
 import com.example.gaeguri.domein.member.dto.response.UserLoginResponseDto;
 import com.example.gaeguri.domein.member.dto.response.UserSignupResponseDto;
+import com.example.gaeguri.domein.member.entity.MemberEntity;
 import com.example.gaeguri.domein.member.repository.MemberRepository;
 import com.example.gaeguri.domein.member.service.SignupService;
 import com.example.gaeguri.global.Response.SingleResult;
-import com.example.gaeguri.global.exception.MemberEmailAlreadyExistsException;
 import com.example.gaeguri.global.Response.service.ResponseService;
+import com.example.gaeguri.global.exception.MemberEmailAlreadyExistsException;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -47,9 +49,11 @@ public class MemberController {
 
     @GetMapping("/{id}")
     public void checkId(@PathVariable String id) {
-        if (memberRepository.findById(id).isPresent())
-            throw new MemberEmailAlreadyExistsException();
-        else
-            responseService.getSuccessResult();
+        signupService.validateDuplicated(id);
+    }
+    @GetMapping("/info")
+    public SingleResult<MemberEntity> getMyInfo(Authentication authentication) {
+        MemberEntity UserInfo = signupService.findById(authentication.getName());
+        return responseService.getSingleResult(UserInfo);
     }
 }
