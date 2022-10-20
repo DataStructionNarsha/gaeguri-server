@@ -57,4 +57,10 @@ public class ExceptionAdvice {
     public Result emailAuthTokenNotFountException() {
         return responseService.getFailureResult(-106, "유효하지 않은 인증요청입니다.");
     }
+
+    @ExceptionHandler(LoginSuccessException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Result LoginSuccessException() {
+        return responseService.getSuccessResult("성공");
+    }
 }

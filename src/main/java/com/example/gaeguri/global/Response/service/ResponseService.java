@@ -28,9 +28,11 @@ public class ResponseService {
         return result;
     }
 
-    public Result getSuccessResult() {
+    public Result getSuccessResult(String msg) {
         Result result = new Result();
-        setSuccessResult(result);
+        result.setSuccess(true);
+        result.setCode(200);
+        result.setMsg(msg);
 
         return result;
     }
