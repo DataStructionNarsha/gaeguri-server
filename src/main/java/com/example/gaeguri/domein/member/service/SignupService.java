@@ -11,10 +11,7 @@ import com.example.gaeguri.domein.member.dto.response.UserSignupResponseDto;
 import com.example.gaeguri.domein.member.entity.MemberEntity;
 import com.example.gaeguri.domein.member.repository.MemberRepository;
 import com.example.gaeguri.global.Response.service.ResponseService;
-import com.example.gaeguri.global.exception.InvalidRefreshTokenException;
-import com.example.gaeguri.global.exception.LoginFailureException;
-import com.example.gaeguri.global.exception.MemberEmailAlreadyExistsException;
-import com.example.gaeguri.global.exception.MemberNotFoundException;
+import com.example.gaeguri.global.exception.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -88,7 +85,7 @@ public class SignupService {
         if (memberRepository.findById(id).isPresent())
             throw new MemberEmailAlreadyExistsException();
         else
-            responseService.getSuccessResult();
+            throw new LoginSuccessException();
     }
 
     public MemberEntity findById(String id) {

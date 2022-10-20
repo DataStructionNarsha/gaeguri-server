@@ -11,7 +11,6 @@ import com.example.gaeguri.domein.member.repository.MemberRepository;
 import com.example.gaeguri.domein.member.service.SignupService;
 import com.example.gaeguri.global.Response.SingleResult;
 import com.example.gaeguri.global.Response.service.ResponseService;
-import com.example.gaeguri.global.exception.MemberEmailAlreadyExistsException;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +50,7 @@ public class MemberController {
     public void checkId(@PathVariable String id) {
         signupService.validateDuplicated(id);
     }
+
     @GetMapping("/info")
     public SingleResult<MemberEntity> getMyInfo(Authentication authentication) {
         MemberEntity UserInfo = signupService.findById(authentication.getName());
