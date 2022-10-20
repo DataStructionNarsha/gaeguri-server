@@ -5,8 +5,11 @@ import com.example.gaeguri.global.Entity.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -37,13 +40,14 @@ public class MemberEntity extends BaseTimeEntity {
     private List<Role> roles;
 
     @Builder
-    public MemberEntity(String id, String password, String profileimage ,String info, String age, List<String> position) {
+    public MemberEntity(String id, String password, String profileimage ,String info, String age, List<String> position, List<Role> roles) {
         this.id = id;
         this.password = password;
         this.info = info;
         this.profileimage = profileimage;
         this.position = position;
         this.age = age;
+        this.roles = Collections.singletonList(Role.USER);
     }
 
     public void update(String password, String profileimage, String info, String age, List<String> position) {
