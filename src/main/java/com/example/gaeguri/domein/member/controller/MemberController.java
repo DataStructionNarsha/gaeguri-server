@@ -7,7 +7,6 @@ import com.example.gaeguri.domein.member.dto.request.UserSignupRequestDto;
 import com.example.gaeguri.domein.member.dto.response.UserLoginResponseDto;
 import com.example.gaeguri.domein.member.dto.response.UserSignupResponseDto;
 import com.example.gaeguri.domein.member.entity.MemberEntity;
-import com.example.gaeguri.domein.member.repository.MemberRepository;
 import com.example.gaeguri.domein.member.service.SignupService;
 import com.example.gaeguri.global.Response.SingleResult;
 import com.example.gaeguri.global.Response.service.ResponseService;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class MemberController {
-    private final MemberRepository memberRepository;
     private final SignupService signupService;
     private final ResponseService responseService;
 

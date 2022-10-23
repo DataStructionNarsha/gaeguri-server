@@ -5,12 +5,10 @@ import com.example.gaeguri.domein.auth.dto.response.TokenResponseDto;
 import com.example.gaeguri.domein.auth.jwt.JwtTokenProvider;
 import com.example.gaeguri.domein.member.dto.request.UserLoginRequestDto;
 import com.example.gaeguri.domein.member.dto.request.UserSignupRequestDto;
-import com.example.gaeguri.domein.member.dto.response.UserInfoResponseDto;
 import com.example.gaeguri.domein.member.dto.response.UserLoginResponseDto;
 import com.example.gaeguri.domein.member.dto.response.UserSignupResponseDto;
 import com.example.gaeguri.domein.member.entity.MemberEntity;
 import com.example.gaeguri.domein.member.repository.MemberRepository;
-import com.example.gaeguri.global.Response.service.ResponseService;
 import com.example.gaeguri.global.exception.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 
@@ -29,12 +26,10 @@ public class SignupService {
     private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
-    private final ResponseService responseService;
 
-    //회원가입 builder패턴
+    //회원가입
     @Transactional
     public UserSignupResponseDto signup(UserSignupRequestDto requestDto){
-        validateDuplicated(requestDto.getId());
         MemberEntity member = memberRepository.save(
                 MemberEntity.builder()
                         .id(requestDto.getId())
@@ -64,6 +59,7 @@ public class SignupService {
         return new TokenResponseDto(accessToken, refreshToken);
     }
 
+    //로그인
     @Transactional
     public UserLoginResponseDto loginMember(UserLoginRequestDto requestDto) {
         MemberEntity member = memberRepository.findById(requestDto.getId()).orElseThrow(LoginFailureException::new);
@@ -80,14 +76,14 @@ public class SignupService {
         String username = userDetails.getUsername();
         return memberRepository.findById(username).orElseThrow(MemberNotFoundException::new);
     }
-
+    //중복 아이디 체크
     public void validateDuplicated(String id) {
         if (memberRepository.findById(id).isPresent())
             throw new MemberEmailAlreadyExistsException();
         else
-            throw new LoginSuccessException();
+            throw new SuccessException();
     }
-
+    //유저 정보 조회
     public MemberEntity findById(String id) {
         return memberRepository.findMemberById(id);
     }
