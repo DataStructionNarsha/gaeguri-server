@@ -58,9 +58,9 @@ public class ExceptionAdvice {
         return responseService.getFailureResult(-106, "유효하지 않은 인증요청입니다.");
     }
 
-    @ExceptionHandler(LoginSuccessException.class)
+    @ExceptionHandler(SuccessException.class)
     @ResponseStatus(HttpStatus.OK)
-    public Result LoginSuccessException() {
+    public Result SuccessException() {
         return responseService.getSuccessResult("성공");
     }
 }
