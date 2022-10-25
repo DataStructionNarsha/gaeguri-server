@@ -24,31 +24,34 @@ public class MemberController {
     private final SignupService signupService;
     private final ResponseService responseService;
 
+    @ApiOperation(value = "회원 등록", notes = "회원 등록 API")
     @PostMapping("/signup")
     public SingleResult<UserSignupResponseDto> Signup(@RequestBody UserSignupRequestDto requestDto){
         UserSignupResponseDto responseDto = signupService.signup(requestDto);
         return responseService.getSingleResult(responseDto);
     }
 
-    @ApiOperation(value = "로컬 로그인", notes = "로컬을 통해 로그인을 진행한다.")
+    @ApiOperation(value = "로그인", notes = "로그인 API")
     @PostMapping("/login")
     public SingleResult<UserLoginResponseDto> login(@RequestBody UserLoginRequestDto requestDto) {
         UserLoginResponseDto responseDto = signupService.loginMember(requestDto);
         return responseService.getSingleResult(responseDto);
     }
 
-    @ApiOperation(value = "토큰 재발급", notes = "Refresh Token을 통해 토큰을 재발급받는다.")
+    @ApiOperation(value = "토큰 재발급", notes = "토큰 재발급 API")
     @PostMapping("/reissue")
     public SingleResult<TokenResponseDto> reIssue(@RequestBody TokenRequestDto tokenRequestDto) {
         TokenResponseDto responseDto = signupService.reIssue(tokenRequestDto);
         return responseService.getSingleResult(responseDto);
     }
 
+    @ApiOperation(value = "중복 아이디 체크", notes = "중복 아이디 체크 API")
     @GetMapping("/{id}")
     public void checkId(@PathVariable String id) {
         signupService.validateDuplicated(id);
     }
 
+    @ApiOperation(value = "회원 정보 찾기", notes = "토큰으로 회원 정보 찾는 API")
     @GetMapping("/info")
     public SingleResult<MemberEntity> getMyInfo(Authentication authentication) {
         MemberEntity UserInfo = signupService.findById(authentication.getName());
