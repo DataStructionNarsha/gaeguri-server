@@ -85,6 +85,8 @@ public class SignupService {
     }
     //유저 정보 조회
     public MemberEntity findById(String id) {
-        return memberRepository.findMemberById(id);
+        MemberEntity member = memberRepository.findMemberById(id);
+        member.setPassword("");
+        return member;
     }
 }

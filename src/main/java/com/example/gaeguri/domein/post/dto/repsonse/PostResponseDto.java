@@ -1,5 +1,6 @@
 package com.example.gaeguri.domein.post.dto.repsonse;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,13 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostResponseDto {
+    @ApiModelProperty(example = "게시판 고유 번호")
     private Long post_Id;
-    private String title;
-    private String body;
-    private String deadline;
-    private String expected_period;
-    private String imege;
-    private String purpose;
-    private String age;
-    private Boolean field;
 }

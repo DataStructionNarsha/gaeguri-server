@@ -1,6 +1,6 @@
 package com.example.gaeguri.domein.post.repository;
 
-import com.example.gaeguri.domein.post.Entity.PostEntity;
+import com.example.gaeguri.domein.post.entity.PostEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
