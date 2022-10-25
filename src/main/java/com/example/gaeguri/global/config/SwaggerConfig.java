@@ -18,8 +18,8 @@ import java.util.Set;
 public class SwaggerConfig {
 
     private ApiInfo swaggerInfo() {
-        return new ApiInfoBuilder().title("IoT API")
-                .description("IoT API Docs").build();
+        return new ApiInfoBuilder().title("음뫄 나르샤")
+                .description("API Documents").build();
     }
 
     @Bean
@@ -37,7 +37,6 @@ public class SwaggerConfig {
     private Set<String> getConsumeContentTypes() {
         Set<String> consumes = new HashSet<>();
         consumes.add("application/json;charset=UTF-8");
-        consumes.add("application/x-www-form-urlencoded");
         return consumes;
     }
 
