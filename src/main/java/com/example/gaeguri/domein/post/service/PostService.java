@@ -33,7 +33,17 @@ public class PostService {
                         .build());
 
         return PostResponseDto.builder()
-                .post_Id(post.getPost_Id())
+                .postId(post.getPostId())
                 .build();
     }
+    @Transactional
+    public PostEntity Info(Long postId){
+        PostEntity pe = postRepository.findPostEntityByPostId(postId);
+        MemberEntity m = new MemberEntity();
+        m.setPassword(" ");
+        return postRepository.findPostEntityByPostId(postId);
+    }
+
+//    @Transactional
+//    public
 }

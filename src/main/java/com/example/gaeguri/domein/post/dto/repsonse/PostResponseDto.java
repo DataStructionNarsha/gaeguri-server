@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PostResponseDto {
     @ApiModelProperty(example = "게시판 고유 번호")
-    private Long post_Id;
+    private Long postId;
 }
