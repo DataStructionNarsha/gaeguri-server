@@ -4,6 +4,7 @@ import com.example.gaeguri.domein.auth.dto.request.TokenRequestDto;
 import com.example.gaeguri.domein.auth.dto.response.TokenResponseDto;
 import com.example.gaeguri.domein.member.dto.request.UserLoginRequestDto;
 import com.example.gaeguri.domein.member.dto.request.UserSignupRequestDto;
+import com.example.gaeguri.domein.member.dto.response.UserInfoResponseDto;
 import com.example.gaeguri.domein.member.dto.response.UserLoginResponseDto;
 import com.example.gaeguri.domein.member.dto.response.UserSignupResponseDto;
 import com.example.gaeguri.domein.member.entity.MemberEntity;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class MemberController {
     private final SignupService signupService;
@@ -53,8 +54,8 @@ public class MemberController {
 
     @ApiOperation(value = "회원 정보 찾기", notes = "토큰으로 회원 정보 찾는 API")
     @GetMapping("/info")
-    public SingleResult<MemberEntity> getMyInfo(Authentication authentication) {
-        MemberEntity UserInfo = signupService.findById(authentication.getName());
+    public SingleResult<UserInfoResponseDto> getMyInfo(Authentication authentication) {
+        UserInfoResponseDto UserInfo = signupService.findById(authentication.getName());
         return responseService.getSingleResult(UserInfo);
     }
 }

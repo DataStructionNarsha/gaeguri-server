@@ -5,6 +5,7 @@ import com.example.gaeguri.domein.auth.dto.response.TokenResponseDto;
 import com.example.gaeguri.domein.auth.jwt.JwtTokenProvider;
 import com.example.gaeguri.domein.member.dto.request.UserLoginRequestDto;
 import com.example.gaeguri.domein.member.dto.request.UserSignupRequestDto;
+import com.example.gaeguri.domein.member.dto.response.UserInfoResponseDto;
 import com.example.gaeguri.domein.member.dto.response.UserLoginResponseDto;
 import com.example.gaeguri.domein.member.dto.response.UserSignupResponseDto;
 import com.example.gaeguri.domein.member.entity.MemberEntity;
@@ -84,9 +85,15 @@ public class SignupService {
             throw new SuccessException();
     }
     //유저 정보 조회
-    public MemberEntity findById(String id) {
+    public UserInfoResponseDto findById(String id) {
         MemberEntity member = memberRepository.findMemberById(id);
-        member.setPassword("");
-        return member;
+        return UserInfoResponseDto.builder()
+                .User_Id(member.getUser_Id())
+                .id(member.getId())
+                .info(member.getInfo())
+                .profileimage(member.getProfileimage())
+                .age(member.getAge())
+                .refreshToken(member.getRefreshToken())
+                .build();
     }
 }
