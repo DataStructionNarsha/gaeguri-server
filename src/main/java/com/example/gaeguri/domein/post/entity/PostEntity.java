@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PostEntity extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long post_Id;
+    private Long postId;
     private String title;
     private String body;
     private LocalDate deadline;
@@ -24,13 +24,13 @@ public class PostEntity extends BaseTimeEntity {
     private String age;
     private Boolean field;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private MemberEntity memberEntity;
 
     @Builder
-     public PostEntity(Long post_Id, String title, String body, LocalDate deadline, String expected_period, String imege, String purpose, String age, MemberEntity memberEntity, Boolean field) {
-        this.post_Id = post_Id;
+     public PostEntity(Long postId, String title, String body, LocalDate deadline, String expected_period, String imege, String purpose, String age, MemberEntity memberEntity, Boolean field) {
+        this.postId = postId;
         this.title = title;
         this.body = body;
         this.deadline = deadline;
