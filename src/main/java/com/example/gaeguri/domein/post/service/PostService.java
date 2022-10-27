@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,10 +41,11 @@ public class PostService {
     public PostEntity Info(Long postId){
         PostEntity pe = postRepository.findPostEntityByPostId(postId);
         MemberEntity m = new MemberEntity();
-        m.setPassword(" ");
         return postRepository.findPostEntityByPostId(postId);
     }
 
-//    @Transactional
-//    public
+    @Transactional
+    public List<PostEntity> InfoAll() {
+        return postRepository.findAll();
+    }
 }

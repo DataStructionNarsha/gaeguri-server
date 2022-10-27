@@ -9,7 +9,10 @@ import com.example.gaeguri.global.Response.service.ResponseService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/post")
@@ -32,8 +35,11 @@ public class PostController {
         return responseService.getSingleResult(post);
     }
 
-//    @GetMapping("/infos")
-//    public SingleResult<>
+    @GetMapping("/infos")
+    public SingleResult<List<PostEntity>> infoAll(){
+        List<PostEntity> entity = postService.InfoAll();
+        return responseService.getSingleResult(entity);
+    }
 
 
 }
