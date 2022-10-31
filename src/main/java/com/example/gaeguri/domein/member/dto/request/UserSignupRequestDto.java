@@ -19,7 +19,9 @@ public class UserSignupRequestDto {
     private String info;
     @ApiModelProperty(example = "프로필 사진")
     private String profileimage;
-    @ApiModelProperty(example = "분야")
+    @ApiModelProperty(example = "[" +
+            "분야" +
+            "]")
     private List<String> position;
     @ApiModelProperty(example = "나이")
     private String age;
