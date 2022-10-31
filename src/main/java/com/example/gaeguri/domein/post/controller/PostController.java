@@ -9,7 +9,6 @@ import com.example.gaeguri.global.Response.service.ResponseService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,5 +40,10 @@ public class PostController {
         return responseService.getSingleResult(entity);
     }
 
+    @GetMapping("/search")
+    public SingleResult<List<PostEntity>> Search(@RequestParam String title){
+        List<PostEntity> entity = postService.Search(title);
+        return responseService.getSingleResult(entity);
+    }
 
 }

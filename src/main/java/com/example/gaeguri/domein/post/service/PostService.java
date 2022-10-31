@@ -48,4 +48,9 @@ public class PostService {
     public List<PostEntity> InfoAll() {
         return postRepository.findAll();
     }
+
+    @Transactional
+    public List<PostEntity> Search(String title){
+        return postRepository.findPostEntityByTitle(title);
+    }
 }
