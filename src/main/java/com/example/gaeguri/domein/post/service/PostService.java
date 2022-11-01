@@ -7,6 +7,8 @@ import com.example.gaeguri.domein.post.dto.request.PostRequestDto;
 import com.example.gaeguri.domein.post.entity.PostEntity;
 import com.example.gaeguri.domein.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -45,12 +47,12 @@ public class PostService {
     }
 
     @Transactional
-    public List<PostEntity> InfoAll() {
-        return postRepository.findAll();
+    public Page<PostEntity> InfoAll(Pageable pageable) {
+        return postRepository.findAllByOrderByPostIdDesc(pageable);
     }
 
     @Transactional
-    public List<PostEntity> Search(String title){
-        return postRepository.findPostEntityByTitle(title);
+    public Page<PostEntity> Search(String title, Pageable pageable){
+        return postRepository.findPostEntityByTitleOrderByPostIdDesc(title, pageable);
     }
 }

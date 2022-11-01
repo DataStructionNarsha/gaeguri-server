@@ -8,6 +8,10 @@ import com.example.gaeguri.global.Response.SingleResult;
 import com.example.gaeguri.global.Response.service.ResponseService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,14 +39,14 @@ public class PostController {
     }
 
     @GetMapping("/infos")
-    public SingleResult<List<PostEntity>> infoAll(){
-        List<PostEntity> entity = postService.InfoAll();
+    public SingleResult<Page<PostEntity>> infoAll(@PageableDefault(size=20)Pageable pageable){
+        Page<PostEntity> entity = postService.InfoAll(pageable);
         return responseService.getSingleResult(entity);
     }
 
     @GetMapping("/search")
-    public SingleResult<List<PostEntity>> Search(@RequestParam String title){
-        List<PostEntity> entity = postService.Search(title);
+    public SingleResult<Page<PostEntity>> Search(@RequestParam String title, Pageable pageable){
+        Page<PostEntity> entity = postService.Search(title, pageable);
         return responseService.getSingleResult(entity);
     }
 
