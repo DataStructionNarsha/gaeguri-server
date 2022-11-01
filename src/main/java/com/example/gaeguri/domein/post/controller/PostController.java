@@ -10,12 +10,11 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/post")
@@ -45,9 +44,16 @@ public class PostController {
     }
 
     @GetMapping("/search")
-    public SingleResult<Page<PostEntity>> Search(@RequestParam String title, Pageable pageable){
-        Page<PostEntity> entity = postService.Search(title, pageable);
-        return responseService.getSingleResult(entity);
+    public SingleResult<Page<PostEntity>> TitleSearch(@RequestParam String keyword, @RequestParam String category , Pageable pageable){
+        if(Objects.equals(category, "제목")) {
+            return responseService.getSingleResult(postService.TitleSearch(keyword, pageable));
+        } else if (Objects.equals(category, "전체")) {
+           return responseService.getSingleResult(postService.Search(keyword, pageable));
+        }
+//        else {
+//
+//        }
+        return null;
     }
 
 }

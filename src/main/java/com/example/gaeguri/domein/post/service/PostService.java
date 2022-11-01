@@ -45,14 +45,23 @@ public class PostService {
         MemberEntity m = new MemberEntity();
         return postRepository.findPostEntityByPostId(postId);
     }
-
+    //전체 불러오기
     @Transactional
     public Page<PostEntity> InfoAll(Pageable pageable) {
         return postRepository.findAllByOrderByPostIdDesc(pageable);
     }
-
+    //제목 검색
     @Transactional
-    public Page<PostEntity> Search(String title, Pageable pageable){
-        return postRepository.findPostEntityByTitleOrderByPostIdDesc(title, pageable);
+    public Page<PostEntity> TitleSearch(String keyword, Pageable pageable){
+        return postRepository.findPostEntityByTitleOrderByPostIdDesc(keyword, pageable);
     }
+    //전체 검색
+    @Transactional
+    public Page<PostEntity> Search(String keyword, Pageable pageable){
+        return postRepository.findAllSearch(keyword, pageable);
+    }
+//    @Transactional
+//    public Page<PostEntity> TitleSearch(String keyword, Pageable pageable){
+//        return postRepository.findPostEntityByTitleOrderByPostIdDesc(keyword, pageable);
+//    }
 }
