@@ -68,7 +68,7 @@ public class JwtTokenProvider {
     }
 
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("ACCESS_TOKEN");
+        return request.getHeader("Authorization");
     }
 
     public boolean validateTokenExpiration(String token) {
